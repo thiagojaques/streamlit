@@ -11,7 +11,7 @@ Desenvolvimento de 12 aplicações Web de Inteligência Artificial
         inicial para montar a franquia?
 
         Ex: Se o custo anual da franquia é R$100.000,00 o investimento
-        inicial será de R$80.000,00. (claro que isso é uma estimativa)
+        inicial será de R$80.000,00. (claro que isso é uma estimativa).
 
     Técnica que pode ser utilizada para implementar a aplicação:
         Regressão Linear:
@@ -27,7 +27,7 @@ Desenvolvimento de 12 aplicações Web de Inteligência Artificial
             (Ex: Localização, Cidade, Tipo de negócio)
 
     O que é preciso?
-        Dados históricos para criar um modelo para servir como base para as previsões
+        Dados históricos para criar um modelo para servir como base para as previsões.
         Arquivo slr12.csv
         FraAnual: Custo anual da franquia
         CusInic: Investimento Inicial
@@ -37,3 +37,75 @@ Desenvolvimento de 12 aplicações Web de Inteligência Artificial
     Principais Funções:
         modelo = LinearRegression().fit(X, y)
         prev = modelo.predict(dados_novo_valor)
+
+2 - Segunda Aplicação " Classificação de veículos "
+
+    Desejo do Cliente:
+        Uma revendedora de carros quer poder prever a qualidade do carro
+        a partir de carros anteriores.
+
+        Assim ela pode precificar de forma mais adequada o serviço 
+        de assistência 24 horas.
+
+        Aempresa possui uma grande base de dados de veículos adquiridos anteriormente,
+        com características como exigência de manutenção, portas, tamanho do porta malas,
+        segurança, etc.
+
+    Técnica que pode ser utilizada para implementar a aplicação:
+        Podemos usar Machine Learning, tarefa de classificação:
+        Machine Learning são técnicas de prever ou classificar algo baseados em dados históricos.
+
+    Implementação:
+        Dividir dados em treino e teste
+        Criar modelo com Naive Bayes
+        Testar a performance do Modelo
+        Prever
+
+        X_train, X_test, y_train, y_test = train_test_split(X_encoded, y, test_size=0.3, random_state=42)
+
+        modelo = CategoricalNB()
+        modelo.fit(X_train, y_train)
+        y_pred = modelo.predict(X_test)
+        acuracia = accuracy_score(y_test, y_pred)
+
+    Atributos:
+        Class: unacc, acc, good, vgood
+        buying: vhigh, high, med, low
+        maint: vhigh, high, med, low
+        doors: 2, 3, 4, more
+        persons: 2, 4, more
+        lug_boot: small, med, big
+        safety: low, med, high
+
+3 - "Fazenda de produção de Leite"
+    Desejo do Cliente:
+        Uma fazenda deseja compreender a produção de leite, de preferência com dados mensais.
+
+        Prever a produção para os próximos meses/anos, para que possa antecipar ações e investimentos.
+        O período (meses para frente) deve ser flexível.
+
+        A empresa possui dados mensais da produção, mas não vem datas.
+
+        A empresa quer que a aplicação permita que novos dados sejam imputados, para que possa atualizar os dados e as previsões.
+
+    Técnica que pode ser utilizada para implementar a aplicação:
+        Transformar dados importantes em Series Temporais:
+            Dados coletados em intervalos regulares de tempos.
+                ts_data = pd.Series(data.iloc[:,0].calues, index= pd.date_ranger(
+                    start = periodo, periods = len(data), ferq = 'M'))
+
+        Decompor:
+            decomposicao = seasonal_decompose(ts_data, model = 'additive')
+
+        Criar modelo arima:
+             modelo = SARIMAX(ts_data, order = (2,0,0), seasonal_order = (0,1,1,12))
+             modelo_fit = modelo.fit()
+
+        Fazer a previsão:
+            previsao = modelo_fit.forecast(steps = periodo_previsao)
+
+    Dados da Aplicação:
+        monthly-milk-production-pounds-p.csv:
+            Exite apenas uma coluna, não exite dadas informadas no arquivo
+            O intervalo é de janeiro de 2000 e dezembro de 2013
+            A aplicação deve servir para processar qualquer serie temporal com dados na mesma estrutua.
