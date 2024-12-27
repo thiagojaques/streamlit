@@ -109,3 +109,32 @@ Desenvolvimento de 12 aplicações Web de Inteligência Artificial
             Exite apenas uma coluna, não exite dadas informadas no arquivo
             O intervalo é de janeiro de 2000 e dezembro de 2013
             A aplicação deve servir para processar qualquer serie temporal com dados na mesma estrutua.
+
+4 - Prever a quebra de equipamentos
+    Desejo do cliente:
+        Uma indústria tem vários equipamentos críticos na sua linha de produção.
+
+        Existem dados fornecidos pela fabricante da média de quebras dos diferentes equipamentos a cada ano.
+
+        A empresa quer uma aplicação que possa calcular a probabilidade de quebras.
+
+        Por exemplo: se em média o equipamento quebra 2 vezes ao ano, a empresa quer saber qual é a probabilidade de quebrar 1, 3, 4 ou até nenhuma vez ao ano.
+
+    Técnica que pode ser utilizada para implementar a aplicação:
+        Distribuição de Poisson:
+            Mede a probabilidade de ocorrência de eventos em intervalos de tempo
+
+            Os eventos a cada intervalo dever ser independentes
+
+            P(X = x)        --> Probabilidade exata
+            P(X < x)        --> Menor ou igual
+            P(X > x)        --> Maior
+
+            Probabilidade Exata:
+                probs = poisson.pmf(x_vals, lamb)
+            
+            Igual ou menor que:
+                probs = poisson.cdf(x_vals, lamb)
+
+            Maior que:
+                probs = poisson.sf(x_vals, lamb)
